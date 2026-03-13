@@ -1,119 +1,123 @@
-🚀 [Nombre del Proyecto]
-Una frase concisa que describa qué hace el proyecto y qué problema resuelve.
-(Ej: Microservicio de autenticación basado en OAuth2 para ecosistemas de banca digital).
+# 🚀 Nombre del Proyecto
 
-📋 Tabla de Contenidos
-Visión General
+> **Una frase concisa que describa qué hace el proyecto y qué problema resuelve.**
+> *(Ej: Microservicio de facturación electrónica basado en eventos para cumplimiento fiscal).*
 
-Arquitectura
+---
 
-Requisitos Previos
+## 📋 Tabla de Contenidos
+* [Visión General](#-visión-general)
+* [Arquitectura](#-arquitectura)
+* [Registro de Decisiones (ADR)](#-registro-de-decisiones-adr)
+* [Requisitos Previos](#-requisitos-previos)
+* [Instalación y Configuración](#-instalación-y-configuración)
+* [Uso](#-uso)
+* [Pruebas](#-pruebas)
+* [Despliegue](#-despliegue)
+* [Contribuir](#-contribuir)
+* [Licencia](#-licencia)
 
-Instalación y Configuración
+---
 
-Uso
+## 🧐 Visión General
+Explica brevemente el "por qué" de este proyecto.
+* **Contexto:** ¿En qué ecosistema vive? (e.g., Core Bancario, E-commerce).
+* **Objetivos:** ¿Qué problema crítico resuelve?
+* **Estado:** `🏗️ En Desarrollo` | `✅ Producción` | `⚠️ Deprecated`
 
-Pruebas
+## 🏗 Arquitectura
+Detalles técnicos de alto nivel para entender la estructura del sistema.
 
-Despliegue
+* **Stack Tecnológico:** [e.g., Go 1.22, PostgreSQL, Redis]
+* **Patrones:** [e.g., Hexagonal Architecture, CQRS, Event-Driven]
+* **Infraestructura:** [e.g., AWS Lambda, Kubernetes, Terraform]
 
-Contribuir
+> **Nota del Arquitecto:** Se ha priorizado la escalabilidad horizontal mediante el uso de colas de mensajes para procesos asíncronos.
 
-Licencia
+---
 
-🧐 Visión General
-Explica brevemente el "por qué" de este proyecto. Incluye:
+## 🏛 Registro de Decisiones de Arquitectura (ADR)
+Mantenemos un histórico de las decisiones técnicas clave para evitar el "conocimiento tribal" y dar contexto a futuros desarrolladores. Los detalles se encuentran en `/docs/adr/`.
 
-Contexto: ¿En qué ecosistema vive?
+| ID | Título | Estatus | Fecha |
+| :--- | :--- | :--- | :--- |
+| [ADR-001](./docs/adr/001.md) | Selección de PostgreSQL sobre NoSQL | ✅ Aceptado | 2024-05-20 |
+| [ADR-002](./docs/adr/002.md) | Uso de gRPC para comunicación interna | 🔄 En Revisión | 2024-06-01 |
 
-Objetivos: ¿Qué se espera lograr?
+---
 
-Estado: (Alpha, Beta, Producción).
+## 🛠 Requisitos Previos
+Antes de comenzar, asegúrate de tener instalado:
+* **Docker & Docker Compose** (v20.10+)
+* **Runtime:** [e.g., Node.js v20 / Python 3.11]
+* **Gestor de dependencias:** [e.g., npm, pip, go mod]
 
-🏗 Arquitectura
-Como arquitecto, este es el corazón del documento. Describe el stack y las decisiones clave.
+---
 
-Lenguaje/Runtime: Node.js v20+, Go 1.22, etc.
+## ⚙️ Instalación y Configuración
 
-Frameworks: FastAPI, React, Spring Boot.
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/usuario/proyecto.git](https://github.com/usuario/proyecto.git)
+   cd proyecto
+   ```
+2. **Configurar variables de entorno:**
+  ```bash
+  cp .env.example .env
+  # Edita .env con tus credenciales locales
+  ```
+3. **Levantar entorno de desarrollo:**
+  ```bash
+  docker-compose up -d
+  ```
+  
+## 🚀 Uso
+Ejemplos rápidos para interactuar con el sistema.
 
-Base de Datos: PostgreSQL (Relacional), Redis (Cache).
+- Documentación API: http://localhost:8080/swagger
+- Health Check: GET /health
 
-Patrones: Clean Architecture, Event-Driven, MVC.
-
-🛠 Requisitos Previos
-Antes de empezar, asegúrate de tener instalado:
-
-[Herramienta 1] (vX.X.X)
-
-[Herramienta 2] (vX.X.X)
-
-Docker & Docker Compose (Recomendado)
-
-⚙️ Instalación y Configuración
-Clonar el repositorio:
-
-Bash
-git clone https://github.com/usuario/proyecto.git
-cd proyecto
-Configurar variables de entorno:
-Copia el archivo de ejemplo y ajusta los valores necesarios.
-
-Bash
-cp .env.example .env
-Levantar el entorno (Docker):
-
-Bash
-docker-compose up -d
-🚀 Uso
-Proporciona ejemplos claros de cómo interactuar con el sistema.
-
-Endpoint Principal: GET /api/v1/resource
-
-Documentación API: Disponible en http://localhost:8080/docs (Swagger/Redoc).
-
-JSON
-// Ejemplo de Payload
+```json
+// Ejemplo de respuesta exitosa
 {
-  "id": "123",
-  "status": "active"
+  "status": "up",
+  "version": "1.0.0",
+  "timestamp": "2024-05-20T12:00:00Z"
 }
-🧪 Pruebas
-La calidad no es negociable. Explica cómo correr los tests.
+```
 
-Bash
-# Unit tests
-npm run test
+## 🧪 Pruebas
+Garantizamos la estabilidad del sistema mediante diferentes niveles de testing:
 
-# Integration tests
-npm run test:e2e
-📦 Despliegue
-Describe brevemente el flujo de CI/CD o los comandos de build.
+```bash
+# Pruebas Unitarias
+npm run test:unit
 
-CI/CD: GitHub Actions / GitLab CI.
+# Pruebas de Integración (Requiere base de datos)
+npm run test:integration
 
-Build: docker build -t proyecto:latest .
+# Cobertura de código
+npm run test:coverage
+```
 
-🤝 Contribuir
-Haz un Fork del proyecto.
+## 📦 Despliegue
+El flujo de despliegue está automatizado mediante [GitHub Actions / Jenkins / GitLab CI].
 
-Crea una Rama para tu feature (git checkout -b feature/AmazingFeature).
+- Build: ```docker build -t proyecto:latest .```
+- Registry: ```docker push my-registry/proyecto:latest```
 
-Haz un Commit de tus cambios (git commit -m 'Add some AmazingFeature').
+## 🤝 Contribuir
+1. Haz un Fork del proyecto.
+2. Crea una Rama para tu feature (git checkout -b feature/AmazingFeature).
+3. Haz un Commit (git commit -m 'Add: some AmazingFeature').
+4. Haz un Push (git push origin feature/AmazingFeature).
+5. Abre un Pull Request.
 
-Haz un Push a la rama (git push origin feature/AmazingFeature).
+## ⚖️ Licencia
+Distribuido bajo la Licencia MIT. Consulta el archivo ```LICENSE``` para más detalles.
 
-Abre un Pull Request.
+## ✉️ Contacto
+Arquitecto Responsable - [Tu Nombre] - [Tu Email/LinkedIn]
 
-⚖️ Licencia
-Distribuido bajo la Licencia [TIPO DE LICENCIA]. Ver LICENSE para más información.
 
-✉️ Contacto
-Tu Nombre/Equipo - @tu_twitter - email@ejemplo.com
-
-💡 Tips Pro de Arquitecto:
-Usa Badges: Añade insignias de estado de build, cobertura de código y versión al inicio.
-
-Keep it Dry: No repitas en el README lo que ya está en la documentación técnica profunda (como Confluence o Wiki); usa links.
-
-Emojis con propósito: Úsalos para guiar la vista, no para saturar.
+¿Necesitas que te ayude a redactar el contenido de los archivos `.md` de la carpeta
